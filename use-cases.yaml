@@ -1,0 +1,64 @@
+# The ONLY use cases we make videos about. A PR that does not change what one of these
+# shows is excluded from the weekly video (category: out_of_scope).
+# Read by scripts/weekly.sh (a) to map PRs to a use case, (b) to pick what a tape types.
+#
+# safety:
+#   offline  - runs with no auth/factory/sidecar; safe to record unattended
+#   fixture  - needs a fake factory/daemon (not built yet); title card only until then
+#
+# All videos are 1200x600 (tapes/_settings.tape).
+
+use_cases:
+  - id: onboarding
+    title: Onboarding a project
+    commands: ["chunk factory bootstrap"]
+    safety: offline
+    notes: >
+      Run in a scratch git repo with a fake remote (git init; git remote add origin
+      https://github.com/acme/calc.git) and pass `--skip-sidecar --org-id
+      00000000-0000-0000-0000-000000000000` so no real org or sidecar is touched.
+      Verified: writes .chunk/config.json and prints "Next: chunk factory plan".
+
+  - id: check-version
+    title: Checking the CLI version
+    commands: ["chunk --version"]
+    safety: offline
+
+  - id: list-commands
+    title: Getting all available commands
+    commands: ["chunk commands"]
+    safety: offline
+    notes: Output is long; at 600px high pipe through `head -30` or scroll once.
+
+  # --- The TUI: `chunk watch` ---------------------------------------------------------
+  # All `chunk watch` interactions run inside the chunk-demos repo (cd there first).
+  # Each step below is its own use case so a PR can map to exactly one video segment.
+  - id: tui-open
+    title: Opening the TUI
+    commands: ["chunk watch"]
+    safety: fixture
+
+  - id: tui-new-plan
+    title: Starting a new plan
+    commands: ["chunk watch, then n, type the request, enter"]
+    keys: {new-plan: n, submit: enter}
+    demo_input: "create an html page with h1 hello world"  # typed verbatim
+    safety: fixture
+
+  - id: tui-switch-plans
+    title: Moving between plans
+    commands: ["chunk watch, then up/down (or j/k) to select, enter to open, esc to go back, ctrl+p to switch plan"]
+    keys: {move: "up/down or j/k", open: enter, back: esc, switch-plan: ctrl+p}
+    safety: fixture
+
+  - id: tui-resume-plan
+    title: Resuming a plan
+    commands: ["chunk watch, select a plan, then R"]
+    keys: {resume-planner: R}
+    safety: fixture
+
+  - id: tui-quit
+    title: Quitting the TUI
+    commands: ["q (or ctrl+c)"]
+    keys: {quit: q, force-quit: ctrl+c}
+    safety: fixture

@@ -2,7 +2,7 @@ Source tapes/_settings.tape
 Output out/02-watch-plan.mp4
 
 Hide
-Type "export PATH=$HOME/Documents/Repositories/chunk-cli/dist:$PATH && clear"
+Type "export PATH=$HOME/Documents/Repositories/chunk-cli/dist:$PATH && cd $HOME/Documents/Repositories/chunk-demos && clear"
 Enter
 Show
 
