@@ -11,7 +11,12 @@ Sleep 100ms
 Type "chunk factory bootstrap"
 Sleep 1s
 Enter
-Wait+Screen@15m /chunk factory plan/
+
+# select the org (first in the list), then bootstrap runs (~3 min max)
+Wait+Screen@30s /Select an organization/
+Sleep 2s
+Enter
+Wait+Screen@3m /Next: chunk factory plan/
 Sleep 5s
 
 # restore the repo's own .chunk config that bootstrap replaced
