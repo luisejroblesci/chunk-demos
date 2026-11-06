@@ -41,16 +41,16 @@ use_cases:
     title: Starting a new plan
     commands: ["chunk watch, then n, type the request, enter"]
     keys: {new-plan: n, submit: enter}
-    demo_input: "add a dark/white theme for the calculator"  # typed verbatim
+    demo_input: "create a vanilla html with hello world in it"  # typed verbatim
     safety: fixture
 
   - id: tui-comment-plan
     title: Commenting on a plan
     commands: ["chunk watch, select a plan (enter), tab to make the plan the active view, down to the row, c, type the comment, enter, then s"]
     keys: {open: enter, active-view: tab, move: down, comment: c, save-comment: enter, send-to-factory: s}
-    demo_input: "make dark theme default"  # typed verbatim, two rows down
+    demo_input: "hello world in red"  # typed verbatim, two rows down
     safety: fixture
-    notes: Recorded in tapes/03-tui-new-plan.tape, right after the plan is generated.
+    notes: Recorded in tapes/03-tui-idea-to-approved-design.tape, right after the plan is generated.
 
   - id: tui-switch-plans
     title: Moving between plans
