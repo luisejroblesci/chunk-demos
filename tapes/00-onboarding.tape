@@ -1,0 +1,21 @@
+Source tapes/_settings.tape
+Output out/00-onboarding.mp4
+
+Hide
+Type "export PATH=$HOME/Documents/Repositories/chunk-cli/dist:$PATH && cd $HOME/Documents/Repositories/chunk-demos && rm -rf .chunk.bak && mv .chunk .chunk.bak && clear"
+Enter
+Show
+
+# chunk factory bootstrap
+Sleep 100ms
+Type "chunk factory bootstrap"
+Sleep 1s
+Enter
+Wait+Screen@15m /chunk factory plan/
+Sleep 5s
+
+# restore the repo's own .chunk config that bootstrap replaced
+Hide
+Type "rm -rf .chunk && mv .chunk.bak .chunk"
+Enter
+Show

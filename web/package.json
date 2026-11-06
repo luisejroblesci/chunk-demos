@@ -1,0 +1,12 @@
+{
+  "name": "chunk-demos-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "login": "node login.mjs",
+    "record": "node record.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

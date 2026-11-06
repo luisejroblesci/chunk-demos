@@ -1,5 +1,7 @@
 Source tapes/_settings.tape
-Output out/01-chunk.mp4
+# `chunk` prints ~58 lines; at the default 22pt only the bottom ~38 fit and the rest scrolls off.
+Set FontSize 14
+Output out/01-chunk-help.mp4
 
 Hide
 Type "export PATH=$HOME/Documents/Repositories/chunk-cli/dist:$PATH && clear"

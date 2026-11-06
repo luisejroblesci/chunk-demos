@@ -6,18 +6,17 @@
 #   offline  - runs with no auth/factory/sidecar; safe to record unattended
 #   fixture  - needs a fake factory/daemon (not built yet); title card only until then
 #
-# All videos are 1200x600 (tapes/_settings.tape).
+# All videos are 1920x1080 (tapes/_settings.tape).
 
 use_cases:
   - id: onboarding
     title: Onboarding a project
     commands: ["chunk factory bootstrap"]
-    safety: offline
+    safety: fixture
     notes: >
-      Run in a scratch git repo with a fake remote (git init; git remote add origin
-      https://github.com/acme/calc.git) and pass `--skip-sidecar --org-id
-      00000000-0000-0000-0000-000000000000` so no real org or sidecar is touched.
-      Verified: writes .chunk/config.json and prints "Next: chunk factory plan".
+      Run inside the chunk-demos repo (tapes/00-onboarding.tape).
+      Bootstrap writes any missing .chunk/config.json, sets up and snapshots the sidecar image,
+      and prints "Next: chunk factory plan".
 
   - id: check-version
     title: Checking the CLI version
@@ -28,7 +27,7 @@ use_cases:
     title: Getting all available commands
     commands: ["chunk commands"]
     safety: offline
-    notes: Output is long; at 600px high pipe through `head -30` or scroll once.
+    notes: Output is long; pipe through `head -30` or scroll once.
 
   # --- The TUI: `chunk watch` ---------------------------------------------------------
   # All `chunk watch` interactions run inside the chunk-demos repo (cd there first).
@@ -42,8 +41,16 @@ use_cases:
     title: Starting a new plan
     commands: ["chunk watch, then n, type the request, enter"]
     keys: {new-plan: n, submit: enter}
-    demo_input: "create an html page with h1 hello world"  # typed verbatim
+    demo_input: "add a dark/white theme for the calculator"  # typed verbatim
     safety: fixture
+
+  - id: tui-comment-plan
+    title: Commenting on a plan
+    commands: ["chunk watch, select a plan (enter), tab to make the plan the active view, down to the row, c, type the comment, enter, then s"]
+    keys: {open: enter, active-view: tab, move: down, comment: c, save-comment: enter, send-to-factory: s}
+    demo_input: "make dark theme default"  # typed verbatim, two rows down
+    safety: fixture
+    notes: Recorded in tapes/03-tui-new-plan.tape, right after the plan is generated.
 
   - id: tui-switch-plans
     title: Moving between plans

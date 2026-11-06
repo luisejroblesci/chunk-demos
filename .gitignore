@@ -1,0 +1,7 @@
+
+# chunk local pool state
+.chunk/*-pool.json
+
+# web demos: saved login session and local deps
+web/.auth/
+web/node_modules/
